@@ -1,0 +1,31 @@
+export const ORDER_STATUS = {
+  PENDING: "PENDING",
+  ACCEPTED: "ACCEPTED",
+  PREPARING: "PREPARING",
+  READY: "READY",
+  COMPLETED: "COMPLETED",
+  CANCELLED: "CANCELLED",
+} as const;
+
+export type OrderStatus = (typeof ORDER_STATUS)[keyof typeof ORDER_STATUS];
+
+export const SORT_COLUMNS = {
+  createdAt: "created_at",
+  totalAmount: "total_amount",
+} as const;
+export const ALLOWED_ORDER_STATUS_TRANSITIONS: Record<
+  OrderStatus,
+  OrderStatus[]
+> = {
+  [ORDER_STATUS.PENDING]: [ORDER_STATUS.ACCEPTED, ORDER_STATUS.CANCELLED],
+
+  [ORDER_STATUS.ACCEPTED]: [ORDER_STATUS.PREPARING],
+
+  [ORDER_STATUS.PREPARING]: [ORDER_STATUS.READY],
+
+  [ORDER_STATUS.READY]: [ORDER_STATUS.COMPLETED],
+
+  [ORDER_STATUS.COMPLETED]: [],
+
+  [ORDER_STATUS.CANCELLED]: [],
+};
