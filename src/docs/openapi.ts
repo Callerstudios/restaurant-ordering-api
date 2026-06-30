@@ -26,6 +26,10 @@ export const openApiDocument: OpenAPIObject = {
       url: "http://localhost:3000",
       description: "Development server",
     },
+    {
+      url: "https://restaurant-ordering-api-uav0.onrender.com",
+      description: "Production Server"
+    },
   ],
 
   tags: [
